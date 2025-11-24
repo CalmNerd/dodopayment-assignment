@@ -7,17 +7,19 @@ import { ShoppingBag, FileText, DollarSign } from 'lucide-react';
 import { PieChart as PieChartIcon } from 'lucide-react';
 import { Separator } from '../ui/separator';
 import { InfoIcon } from '../icons/icons';
+import { SPENDING_SUMMARY_CONSTANTS } from '@/constants';
+import { PieChartData, SpendingCategory } from '@/types';
 
-const data = [
-    { name: 'Shopping', value: 900, color: '#335CFF' },
-    { name: 'Utilities', value: 600, color: '#47C2FF' },
-    { name: 'Others', value: 300, color: '#E1E4EA' },
+const data: PieChartData[] = [
+    { name: SPENDING_SUMMARY_CONSTANTS.categories.shopping, value: 900, color: '#335CFF' },
+    { name: SPENDING_SUMMARY_CONSTANTS.categories.utilities, value: 600, color: '#47C2FF' },
+    { name: SPENDING_SUMMARY_CONSTANTS.categories.others, value: 300, color: '#E1E4EA' },
 ];
 
-const categories = [
-    { label: 'Shopping', amount: '$900.00', icon: ShoppingBag, color: 'text-[#335CFF] bg-[#EBF1FF]' },
-    { label: 'Utilities', amount: '$600.00', icon: FileText, color: 'text-[#47C2FF] bg-[#EBF8FF]' },
-    { label: 'Others', amount: '$200.00', icon: DollarSign, color: 'text-[#525866] bg-[#F2F5F8]' },
+const categories: SpendingCategory[] = [
+    { label: SPENDING_SUMMARY_CONSTANTS.categories.shopping, amount: '$900.00', icon: ShoppingBag, color: 'text-[#335CFF] bg-[#EBF1FF]' },
+    { label: SPENDING_SUMMARY_CONSTANTS.categories.utilities, amount: '$600.00', icon: FileText, color: 'text-[#47C2FF] bg-[#EBF8FF]' },
+    { label: SPENDING_SUMMARY_CONSTANTS.categories.others, amount: '$200.00', icon: DollarSign, color: 'text-[#525866] bg-[#F2F5F8]' },
 ];
 
 export const SpendingSummaryWidget = () => {
@@ -26,15 +28,15 @@ export const SpendingSummaryWidget = () => {
             <CardHeader className="flex flex-row items-center justify-between gap-2">
                 <div className="flex items-center gap-2 w-full">
                     <PieChartIcon size={24} className="text-muted-foreground" />
-                    <CardTitle className="flex-1 text-base font-medium text-foreground line-clamp-1">Spending Summary</CardTitle>
+                    <CardTitle className="flex-1 text-base font-medium text-foreground line-clamp-1">{SPENDING_SUMMARY_CONSTANTS.title}</CardTitle>
                 </div>
                 <Select defaultValue="week">
                     <SelectTrigger size='sm' className=" w-[110px] text-xs border-border bg-card">
-                        <SelectValue placeholder="Period" />
+                        <SelectValue placeholder={SPENDING_SUMMARY_CONSTANTS.periodPlaceholder} />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="week">Last Week</SelectItem>
-                        <SelectItem value="month">Last Month</SelectItem>
+                        <SelectItem value="week">{SPENDING_SUMMARY_CONSTANTS.lastWeek}</SelectItem>
+                        <SelectItem value="month">{SPENDING_SUMMARY_CONSTANTS.lastMonth}</SelectItem>
                     </SelectContent>
                 </Select>
             </CardHeader>
@@ -64,8 +66,8 @@ export const SpendingSummaryWidget = () => {
                     </ResponsiveContainer>
                     {/* Center Text */}
                     <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-center pb-4">
-                        <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-widest mb-1">SPEND</p>
-                        <p className="text-2xl font-medium text-foreground">$1,800.00</p>
+                        <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-widest mb-1">{SPENDING_SUMMARY_CONSTANTS.spendLabel}</p>
+                        <p className="text-2xl font-medium text-foreground">{SPENDING_SUMMARY_CONSTANTS.defaultTotalSpend}</p>
                     </div>
                 </div>
 
@@ -91,7 +93,7 @@ export const SpendingSummaryWidget = () => {
                 </div>
 
                 <div className="w-full rounded-lg p-2.5 flex items-center justify-between gap-2 text-xs text-muted-foreground border border-border">
-                    <span>Your weekly spending limit is <span className="font-medium">$2000</span>.</span>
+                    <span>{SPENDING_SUMMARY_CONSTANTS.weeklySpendingLimit} <span className="font-medium">{SPENDING_SUMMARY_CONSTANTS.weeklySpendingLimitAmount}</span>.</span>
                     <InfoIcon />
                 </div>
             </CardContent>

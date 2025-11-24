@@ -30,67 +30,59 @@ import {
 import { NavUser } from './nav-user'
 import { NavTeamSwitcher } from './team-switcher'
 import { ApexLogoIcon } from '../icons/icons'
+import { SIDEBAR_CONSTANTS } from '@/constants'
+import { SidebarNavItem, Team } from '@/types'
 
-interface SidebarNavItem {
-    group?: string
-    items: {
-        title: string
-        href: string
-        icon: React.ReactNode
-        badge?: number
-    }[]
-}
-
-const teams = [
-    { name: "Apex", logo: <ApexLogoIcon className="w-10 h-10" />, plan: "Finance & Banking" },
+const teams: Team[] = [
+    { name: SIDEBAR_CONSTANTS.team.name, logo: <ApexLogoIcon className="w-10 h-10" />, plan: SIDEBAR_CONSTANTS.team.plan },
 ]
 
 const navigationItems: SidebarNavItem[] = [
     {
-        group: 'MAIN',
+        group: SIDEBAR_CONSTANTS.groups.main,
         items: [
             {
-                title: 'Dashboard',
+                title: SIDEBAR_CONSTANTS.navItems.dashboard,
                 href: '/dashboard',
                 icon: <LayoutGrid className="h-5 w-5" />,
             },
             {
-                title: 'My Cards',
+                title: SIDEBAR_CONSTANTS.navItems.myCards,
                 href: '/my-cards',
                 icon: <CreditCard className="h-5 w-5" />,
             },
             {
-                title: 'Transfer',
+                title: SIDEBAR_CONSTANTS.navItems.transfer,
                 href: '/transfer',
                 icon: <ArrowLeftRight className="h-5 w-5" />,
             },
             {
-                title: 'Transactions',
+                title: SIDEBAR_CONSTANTS.navItems.transactions,
                 href: '/transactions',
                 icon: <History className="h-5 w-5" />,
             },
             {
-                title: 'Payments',
+                title: SIDEBAR_CONSTANTS.navItems.payments,
                 href: '/payments',
                 icon: <Receipt className="h-5 w-5" />,
             },
             {
-                title: 'Exchange',
+                title: SIDEBAR_CONSTANTS.navItems.exchange,
                 href: '/exchange',
                 icon: <RefreshCw className="h-5 w-5" />,
             },
         ]
     },
     {
-        group: 'OTHERS',
+        group: SIDEBAR_CONSTANTS.groups.others,
         items: [
             {
-                title: 'Settings',
+                title: SIDEBAR_CONSTANTS.navItems.settings,
                 href: '/settings',
                 icon: <Settings className="h-5 w-5" />,
             },
             {
-                title: 'Support',
+                title: SIDEBAR_CONSTANTS.navItems.support,
                 href: '/support',
                 icon: <Headphones className="h-5 w-5" />,
             },
@@ -158,7 +150,7 @@ export default function AppSideBar() {
 
             <SidebarFooter className="bg-sidebar p-4 relative">
             <div className='absolute top-0 left-1/2 mx-auto max-w-[80%] -translate-x-1/2 h-px bg-sidebar-border w-full z-10' />
-                <NavUser user={{ name: 'Arthur Taylor', email: 'arthur@alignui.com', avatar: 'avatar.png' }} />
+                <NavUser user={{ name: SIDEBAR_CONSTANTS.user.name, email: SIDEBAR_CONSTANTS.user.email, avatar: SIDEBAR_CONSTANTS.user.avatar }} />
             </SidebarFooter>
         </Sidebar>
     )

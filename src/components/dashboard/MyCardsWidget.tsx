@@ -8,16 +8,16 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { ApexLogoIcon, DebitCardIcon, WifiIcon } from '@/components/icons/icons';
 import { formatCurrency } from '@/lib/utils';
+import { MY_CARDS_CONSTANTS } from '@/constants';
+import { TimeFrame, SpendingLimitsConfig } from '@/types';
 
-const SPENDING_LIMITS = {
-    daily: { limit: 500, spent: 325, label: 'day' },
-    weekly: { limit: 1500, spent: 920, label: 'week' },
-    monthly: { limit: 5000, spent: 3200, label: 'month' },
+const SPENDING_LIMITS: SpendingLimitsConfig = {
+    daily: { limit: 500, spent: 325, label: MY_CARDS_CONSTANTS.timePeriods.day },
+    weekly: { limit: 1500, spent: 920, label: MY_CARDS_CONSTANTS.timePeriods.week },
+    monthly: { limit: 5000, spent: 3200, label: MY_CARDS_CONSTANTS.timePeriods.month },
 } as const;
 
 const MAX_LIMIT = SPENDING_LIMITS.monthly.limit;
-
-type TimeFrame = keyof typeof SPENDING_LIMITS;
 
 const useCSSVariable = (variableName: string, fallback: string) => {
     const [color, setColor] = useState(fallback);
@@ -75,7 +75,7 @@ const SpendingLimitDisplay = ({ timeFrame }: { timeFrame: TimeFrame }) => {
             </div>
 
             <div className="flex-1 w-full">
-                <p className="text-sm text-muted-foreground">Spending Limit</p>
+                <p className="text-sm text-muted-foreground">{MY_CARDS_CONSTANTS.spendingLimit}</p>
                 <div className="flex items-center gap-1">
                     <span className="text-lg font-medium text-foreground">{formatCurrency(limit)}</span>
                     <span className="text-xs text-muted-foreground">/ {label}</span>
@@ -97,10 +97,10 @@ export const MyCardsWidget = () => {
                     <div className="">
                         <DebitCardIcon className="text-muted-foreground size-6" />
                     </div>
-                    <CardTitle className="text-base font-medium text-foreground">My Cards</CardTitle>
+                    <CardTitle className="text-base font-medium text-foreground">{MY_CARDS_CONSTANTS.title}</CardTitle>
                 </div>
                 <Button variant="outline" size="sm" className="h-8 gap-1 text-xs text-muted-foreground hover:text-foreground">
-                    <Plus size={14} /> Add Card
+                    <Plus size={14} /> {MY_CARDS_CONSTANTS.addCard}
                 </Button>
             </CardHeader>
             <CardContent className="flex-1 gap-4 flex flex-col justify-between">
@@ -117,7 +117,7 @@ export const MyCardsWidget = () => {
 
                             <div className="flex items-center gap-1 pr-2 py-0.5 rounded-sm border border-border bg-white">
                                 <div className="rounded-full p-1 flex items-center justify-center"><Check size={12} className='text-background bg-green-500 rounded-full p-px' /></div>
-                                <span className="text-xs font-medium text-muted-foreground">Active</span>
+                                <span className="text-xs font-medium text-muted-foreground">{MY_CARDS_CONSTANTS.active}</span>
                             </div>
 
                         </div>
@@ -130,9 +130,9 @@ export const MyCardsWidget = () => {
                     </div>
 
                     <div className="z-10 mt-auto mb-2">
-                        <p className="text-sm text-muted-foreground">Savings Card</p>
+                        <p className="text-sm text-muted-foreground">{MY_CARDS_CONSTANTS.savingsCard}</p>
                         <div className="flex justify-between items-end mt-1">
-                            <h3 className="text-3xl font-medium text-foreground tracking-tight">$16,058.94</h3>
+                            <h3 className="text-3xl font-medium text-foreground tracking-tight">{MY_CARDS_CONSTANTS.defaultBalance}</h3>
                         </div>
                     </div>
 
@@ -155,19 +155,19 @@ export const MyCardsWidget = () => {
                             value="daily"
                             className="flex-1 bg-background data-[state=active]:bg-muted py-1 text-sm font-medium transition-all rounded-none !shadow-none border-none h-auto data-[state=active]:text-foreground data-[state=active]:!shadow-none data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:text-foreground"
                         >
-                            Daily
+                            {MY_CARDS_CONSTANTS.timeFrames.daily}
                         </TabsTrigger>
                         <TabsTrigger
                             value="weekly"
                             className="flex-1 bg-background data-[state=active]:bg-muted py-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-none !shadow-none border-none h-auto data-[state=active]:text-foreground data-[state=active]:!shadow-none"
                         >
-                            Weekly
+                            {MY_CARDS_CONSTANTS.timeFrames.weekly}
                         </TabsTrigger>
                         <TabsTrigger
                             value="monthly"
                             className="flex-1 bg-background data-[state=active]:bg-muted py-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-none !shadow-none border-none h-auto data-[state=active]:text-foreground data-[state=active]:!shadow-none"
                         >
-                            Monthly
+                            {MY_CARDS_CONSTANTS.timeFrames.monthly}
                         </TabsTrigger>
                     </TabsList>
                     <div className='w-full'>

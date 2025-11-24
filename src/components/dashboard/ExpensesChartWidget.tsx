@@ -2,8 +2,10 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowDownLeft } from 'lucide-react';
 import { LineChart, Line, ResponsiveContainer } from 'recharts';
+import { EXPENSES_CHART_CONSTANTS } from '@/constants';
+import { LineChartData } from '@/types';
 
-const data = [
+const data: LineChartData[] = [
     { value: 4000 },
     { value: 3000 },
     { value: 5000 },
@@ -26,11 +28,11 @@ export const ExpensesChartWidget = () => {
 
                     {/* Title & Amount */}
                     <div className="space-y-2">
-                        <p className="text-sm text-muted-foreground">Total Expenses</p>
+                        <p className="text-sm text-muted-foreground">{EXPENSES_CHART_CONSTANTS.totalExpenses}</p>
                         <div className="flex items-center gap-2">
-                            <h2 className="text-3xl font-medium text-foreground tracking-tight">$6,240.28</h2>
+                            <h2 className="text-3xl font-medium text-foreground tracking-tight">{EXPENSES_CHART_CONSTANTS.defaultTotalExpenses}</h2>
                              <div className="flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-[#FFC0C5] bg-opacity-50">
-                                <span className="text-xs font-medium text-[#681219]">-2%</span>
+                                <span className="text-xs font-medium text-[#681219]">{EXPENSES_CHART_CONSTANTS.percentageChange}</span>
                             </div>
                         </div>
                     </div>

@@ -3,12 +3,14 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ChevronRight, Landmark, ChartLine } from 'lucide-react';
 import { AmazonIcon, RecentTransactionsIcon, RentanIncomeIcon } from '../icons/icons';
+import { TRANSACTIONS_CONSTANTS } from '@/constants';
+import { Transaction } from '@/types';
 
-const transactions = [
-    { id: 1, title: 'Salary Deposit', sub: 'Monthly salary from Apex...', amount: '$3,500.00', date: 'Sep 18', icon: Landmark, color: 'bg-background border-border' },
-    { id: 2, title: 'Stock Dividend', sub: 'Payment from stock investm...', amount: '$846.14', date: 'Sep 18', icon: ChartLine, color: 'bg-background border-border' },
-    { id: 3, title: 'Rental Income', sub: 'Rental payment from Mr. Du...', amount: '$100.00', date: 'Sep 17', icon: RentanIncomeIcon, color: 'bg-[#E0FAEC] text-[#1FC16B] border-transparent' },
-    { id: 4, title: 'Refund from Amazon', sub: 'Refund of Order No #124235', amount: '$36.24', date: 'Sep 15', icon: AmazonIcon, color: 'bg-background border-border' },
+const transactions: Transaction[] = [
+    { id: 1, title: TRANSACTIONS_CONSTANTS.transactionTitles.salaryDeposit, sub: TRANSACTIONS_CONSTANTS.transactionDescriptions.salaryDeposit, amount: TRANSACTIONS_CONSTANTS.transactionAmounts.salaryDeposit, date: TRANSACTIONS_CONSTANTS.transactionDates.sep18, icon: Landmark, color: 'bg-background border-border' },
+    { id: 2, title: TRANSACTIONS_CONSTANTS.transactionTitles.stockDividend, sub: TRANSACTIONS_CONSTANTS.transactionDescriptions.stockDividend, amount: TRANSACTIONS_CONSTANTS.transactionAmounts.stockDividend, date: TRANSACTIONS_CONSTANTS.transactionDates.sep18, icon: ChartLine, color: 'bg-background border-border' },
+    { id: 3, title: TRANSACTIONS_CONSTANTS.transactionTitles.rentalIncome, sub: TRANSACTIONS_CONSTANTS.transactionDescriptions.rentalIncome, amount: TRANSACTIONS_CONSTANTS.transactionAmounts.rentalIncome, date: TRANSACTIONS_CONSTANTS.transactionDates.sep17, icon: RentanIncomeIcon, color: 'bg-[#E0FAEC] text-[#1FC16B] border-transparent' },
+    { id: 4, title: TRANSACTIONS_CONSTANTS.transactionTitles.refundAmazon, sub: TRANSACTIONS_CONSTANTS.transactionDescriptions.refundAmazon, amount: TRANSACTIONS_CONSTANTS.transactionAmounts.refundAmazon, date: TRANSACTIONS_CONSTANTS.transactionDates.sep15, icon: AmazonIcon, color: 'bg-background border-border' },
 ];
 
 export const TransactionsWidget = () => {
@@ -19,19 +21,19 @@ export const TransactionsWidget = () => {
                     <div className="p-0.5">
                         <RecentTransactionsIcon className="w-6 h-6" />
                     </div>
-                    <CardTitle className="flex-1text-base font-medium text-foreground line-clamp-1">Recent Transactions</CardTitle>
+                    <CardTitle className="flex-1text-base font-medium text-foreground line-clamp-1">{TRANSACTIONS_CONSTANTS.title}</CardTitle>
                 </div>
                 <Button variant="outline" size="sm" className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground gap-1">
-                    See All
+                    {TRANSACTIONS_CONSTANTS.seeAll}
                 </Button>
             </CardHeader>
             <CardContent className="w-full flex flex-col gap-3">
                 {/* Tabs */}
                 <Tabs defaultValue="incoming" className="w-full">
                     <TabsList className="flex gap-px bg-muted p-1 rounded-xl w-full h-auto">
-                        <TabsTrigger value="incoming" className="flex-1 h-auto rounded-md px-0 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground border-0 data-[state=active]:bg-card data-[state=active]:shadow-sm data-[state=active]:text-foreground data-[state=active]:rounded-lg transition-all">Incoming</TabsTrigger>
-                        <TabsTrigger value="outgoing" className="flex-1 h-auto rounded-md px-0 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground border-0 data-[state=active]:bg-card data-[state=active]:shadow-sm data-[state=active]:text-foreground data-[state=active]:rounded-lg transition-colors">Outgoing</TabsTrigger>
-                        <TabsTrigger value="pending" className="flex-1 h-auto rounded-md px-0 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground border-0 data-[state=active]:bg-card data-[state=active]:shadow-sm data-[state=active]:text-foreground data-[state=active]:rounded-lg transition-colors">Pending</TabsTrigger>
+                        <TabsTrigger value="incoming" className="flex-1 h-auto rounded-md px-0 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground border-0 data-[state=active]:bg-card data-[state=active]:shadow-sm data-[state=active]:text-foreground data-[state=active]:rounded-lg transition-all">{TRANSACTIONS_CONSTANTS.tabs.incoming}</TabsTrigger>
+                        <TabsTrigger value="outgoing" className="flex-1 h-auto rounded-md px-0 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground border-0 data-[state=active]:bg-card data-[state=active]:shadow-sm data-[state=active]:text-foreground data-[state=active]:rounded-lg transition-colors">{TRANSACTIONS_CONSTANTS.tabs.outgoing}</TabsTrigger>
+                        <TabsTrigger value="pending" className="flex-1 h-auto rounded-md px-0 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground border-0 data-[state=active]:bg-card data-[state=active]:shadow-sm data-[state=active]:text-foreground data-[state=active]:rounded-lg transition-colors">{TRANSACTIONS_CONSTANTS.tabs.pending}</TabsTrigger>
                     </TabsList>
                 </Tabs>
 

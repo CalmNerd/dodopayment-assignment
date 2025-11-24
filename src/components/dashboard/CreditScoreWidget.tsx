@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CreditScoreIcon } from '../icons/icons';
 import { Separator } from '../ui/separator';
+import { CREDIT_SCORE_CONSTANTS } from '@/constants';
 
 export const CreditScoreWidget = () => {
     // Generate bars 
@@ -25,10 +26,10 @@ export const CreditScoreWidget = () => {
                     <div className="p-0.5">
                         <CreditScoreIcon className="w-6 h-6" />
                     </div>
-                    <CardTitle className="flex-1text-base font-medium text-foreground line-clamp-1">Credit Score</CardTitle>
+                    <CardTitle className="flex-1text-base font-medium text-foreground line-clamp-1">{CREDIT_SCORE_CONSTANTS.title}</CardTitle>
                 </div>
                 <Button variant="outline" size="sm" className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground gap-1">
-                    Details
+                    {CREDIT_SCORE_CONSTANTS.details}
                 </Button>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -36,12 +37,12 @@ export const CreditScoreWidget = () => {
                 <div className="flex justify-between items-start">
                     <div>
                         <h3 className="text-xl font-normal text-muted-foreground mb-1">
-                            Your credit score is <span className="font-semibold text-foreground">710</span>
+                            {CREDIT_SCORE_CONSTANTS.scoreMessage} <span className="font-semibold text-foreground">710</span>
                         </h3>
-                        <p className="text-xs text-muted-foreground">This score is considered to be Excellent.</p>
+                        <p className="text-xs text-muted-foreground">{CREDIT_SCORE_CONSTANTS.scoreDescription}</p>
                     </div>
                     <div className="w-11 h-11 bg-[#FFF1EB] rounded-full flex items-center justify-center text-xl shrink-0">
-                        😎
+                        {CREDIT_SCORE_CONSTANTS.emoji}
                     </div>
                 </div>
 
