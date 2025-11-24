@@ -26,6 +26,7 @@ import {
     Settings,
     Headphones,
     ChevronRight,
+    Webhook,
 } from 'lucide-react'
 import { NavUser } from './nav-user'
 import { NavTeamSwitcher } from './team-switcher'
@@ -45,6 +46,11 @@ const navigationItems: SidebarNavItem[] = [
                 title: SIDEBAR_CONSTANTS.navItems.dashboard,
                 href: '/dashboard',
                 icon: <LayoutGrid className="h-5 w-5" />,
+            },
+            {
+                title: SIDEBAR_CONSTANTS.navItems.queueDemo,
+                href: '/queue-demo',
+                icon: <Webhook className="h-5 w-5" />,
             },
             {
                 title: SIDEBAR_CONSTANTS.navItems.myCards,

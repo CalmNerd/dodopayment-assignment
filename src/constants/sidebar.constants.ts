@@ -13,6 +13,7 @@ export const SIDEBAR_CONSTANTS = {
     transactions: 'Transactions',
     payments: 'Payments',
     exchange: 'Exchange',
+    queueDemo: 'Queue Demo',
     settings: 'Settings',
     support: 'Support',
   },
