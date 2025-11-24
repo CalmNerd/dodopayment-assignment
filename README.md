@@ -79,7 +79,6 @@ npm run lint
   - `@radix-ui/react-tabs` - Tab navigation
   - `@radix-ui/react-tooltip` - Tooltip components
 - **Lucide React** - Icon library for modern, consistent icons
-- **Motion** - Animation library for smooth transitions
 - **Recharts** - Charting library for data visualization
 
 ### Utilities & Helpers
