@@ -20,7 +20,7 @@ export const ExpensesChartWidget = () => {
         <Card className="shadow-xs relative h-[178px] flex flex-col justify-center">
             <CardContent className="p-4 space-y-4 relative">
                 {/* Header Section */}
-                <div className="flex flex-col gap-">
+                <div className="flex flex-col gap-4">
                      {/* Icon */}
                     <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center bg-card shadow-sm">
                         <ArrowDownLeft className="h-5 w-5 text-muted-foreground" />

@@ -115,7 +115,7 @@ export default function AppSideBar() {
 
             <SidebarContent className="bg-sidebar">
                 {navigationItems.map((group) => (
-                    <SidebarGroup key={group.group} className='py-5 px-0'>
+                    <SidebarGroup key={group.group} className='pt-5 px-0'>
                         <SidebarGroupLabel className="text-xs font-medium text-muted-foreground uppercase tracking-wider py-1 px-6">{group.group}</SidebarGroupLabel>
                         <SidebarGroupContent className=''>
                             <SidebarMenu>

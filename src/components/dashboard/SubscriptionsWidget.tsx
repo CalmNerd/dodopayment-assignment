@@ -25,7 +25,7 @@ export const SubscriptionsWidget = () => {
                     <div className="absolute -top-20 -right-20 w-40 h-40">
                         <AppleMusicIcon className='size-full' />
                     </div>
-                    <div className="flex flex-col items-start gap-4">
+                    <div className="flex flex-col items-start gap-4 z-10">
                         <div className='size-8'>
                             <AppleMusicIcon className='size-full' />
                         </div>
