@@ -24,11 +24,11 @@ export function NavTeamSwitcher({
 }: {
     teams: {
         name: string
-        logo: React.ElementType
+        logo: React.ReactNode
         plan: string
     }[]
 }) {
-    const { isMobile } = useSidebar()
+    const { isMobile, state } = useSidebar()
     const [activeTeam, setActiveTeam] = React.useState(teams[0])
 
     if (!activeTeam) {
@@ -36,7 +36,7 @@ export function NavTeamSwitcher({
     }
 
     return (
-        <SidebarMenu>
+        <SidebarMenu className={`transition-all duration-300 ${state !== "collapsed" ? "p-4" : "px-0 py-4"}`}>
             <SidebarMenuItem>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -44,14 +44,16 @@ export function NavTeamSwitcher({
                             size="lg"
                             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                         >
-                            <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                                <activeTeam.logo className="size-4" />
+                            <div className="bg-primary flex aspect-square size-10 items-center justify-center rounded-full relative overflow-hidden shrink-0">
+                                {activeTeam.logo ? activeTeam.logo : <div> {activeTeam.name.charAt(0)} </div>}
                             </div>
                             <div className="grid flex-1 text-left text-sm leading-tight">
-                                <span className="truncate font-medium">{activeTeam.name}</span>
-                                <span className="truncate text-xs">{activeTeam.plan}</span>
+                                <span className="truncate font-semibold text-foreground">{activeTeam.name}</span>
+                                <span className="truncate text-xs text-muted-foreground font-normal">{activeTeam.plan}</span>
                             </div>
-                            <ChevronsUpDown className="ml-auto" />
+                            <div className="flex items-center p-0.5 border border-border rounded-sm">
+                                <ChevronsUpDown className="ml-auto size-4 text-muted-foreground" />
+                            </div>
                         </SidebarMenuButton>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
@@ -70,7 +72,7 @@ export function NavTeamSwitcher({
                                 className="gap-2 p-2"
                             >
                                 <div className="flex size-6 items-center justify-center rounded-md border">
-                                    <team.logo className="size-3.5 shrink-0" />
+                                    {team.logo}
                                 </div>
                                 {team.name}
                                 <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>

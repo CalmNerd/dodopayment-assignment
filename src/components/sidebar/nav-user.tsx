@@ -2,10 +2,11 @@
 
 import {
     CreditCard,
-    MoreVertical,
     LogOut,
     Bell,
     UserCircle,
+    ChevronRight,
+    BadgeCheck,
 } from "lucide-react"
 
 import {
@@ -47,19 +48,22 @@ export function NavUser({
                     <DropdownMenuTrigger asChild>
                         <SidebarMenuButton
                             size="lg"
-                            className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                            className="cursor-pointer data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground h-14"
                         >
-                            <Avatar className="h-8 w-8 rounded-lg grayscale">
+                            <Avatar className="h-10 w-10 rounded-full bg-[#C0D5FF]">
                                 <AvatarImage src={user.avatar} alt={user.name} />
-                                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                                <AvatarFallback className="rounded-full bg-[#C0D5FF] text-blue-700">SW</AvatarFallback>
                             </Avatar>
                             <div className="grid flex-1 text-left text-sm leading-tight">
-                                <span className="truncate font-medium">{user.name}</span>
+                                <div className="flex items-center gap-1">
+                                    <span className="truncate font-medium text-foreground">{user.name}</span>
+                                    <BadgeCheck size={14} className="text-background fill-[#47C2FF]" />
+                                </div>
                                 <span className="text-muted-foreground truncate text-xs">
                                     {user.email}
                                 </span>
                             </div>
-                            <MoreVertical className="ml-auto size-4" />
+                            <ChevronRight className="ml-auto size-4 text-muted-foreground" />
                         </SidebarMenuButton>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
@@ -72,7 +76,7 @@ export function NavUser({
                             <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                                 <Avatar className="h-8 w-8 rounded-lg">
                                     <AvatarImage src={user.avatar} alt={user.name} />
-                                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                                    <AvatarFallback className="rounded-lg">SW</AvatarFallback>
                                 </Avatar>
                                 <div className="grid flex-1 text-left text-sm leading-tight">
                                     <span className="truncate font-medium">{user.name}</span>

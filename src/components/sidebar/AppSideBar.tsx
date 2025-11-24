@@ -3,7 +3,6 @@
 import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { motion, AnimatePresence } from 'motion/react'
 import {
     Sidebar,
     SidebarContent,
@@ -16,32 +15,21 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
     useSidebar,
-    SidebarTrigger,
 } from '@/components/ui/sidebar'
 import {
-    Home,
-    TrendingUp,
-    Search,
-    Filter,
-    Github,
-    Star,
-    GitFork,
-    Code,
-    PieChart,
-    Frame,
-    Map,
-    Command,
-    SquareTerminal,
-    Bot,
-    BookOpen,
-    Settings2,
-    GalleryVerticalEnd,
-    AudioWaveform,
+    LayoutGrid,
+    CreditCard,
+    ArrowLeftRight,
+    History,
+    Receipt,
+    RefreshCw,
     Settings,
-    HelpCircle,
+    Headphones,
+    ChevronRight,
 } from 'lucide-react'
 import { NavUser } from './nav-user'
 import { NavTeamSwitcher } from './team-switcher'
+import { ApexLogoIcon } from '../icons/icons'
 
 interface SidebarNavItem {
     group?: string
@@ -49,211 +37,71 @@ interface SidebarNavItem {
         title: string
         href: string
         icon: React.ReactNode
-        description: string
+        badge?: number
     }[]
 }
 
-// const data = {
-//     user: {
-//         name: "shadcn",
-//         email: "m@example.com",
-//         avatar: "/avatars/shadcn.jpg",
-//     },
-//     teams: [
-//         {
-//             name: "Acme Inc",
-//             logo: GalleryVerticalEnd,
-//             plan: "Enterprise",
-//         },
-//         {
-//             name: "Acme Corp.",
-//             logo: AudioWaveform,
-//             plan: "Startup",
-//         },
-//         {
-//             name: "Evil Corp.",
-//             logo: Command,
-//             plan: "Free",
-//         },
-//     ],
-//     navMain: [
-//         {
-//             title: "Playground",
-//             url: "#",
-//             icon: SquareTerminal,
-//             isActive: true,
-//             items: [
-//                 {
-//                     title: "History",
-//                     url: "#",
-//                 },
-//                 {
-//                     title: "Starred",
-//                     url: "#",
-//                 },
-//                 {
-//                     title: "Settings",
-//                     url: "#",
-//                 },
-//             ],
-//         },
-//         {
-//             title: "Models",
-//             url: "#",
-//             icon: Bot,
-//             items: [
-//                 {
-//                     title: "Genesis",
-//                     url: "#",
-//                 },
-//                 {
-//                     title: "Explorer",
-//                     url: "#",
-//                 },
-//                 {
-//                     title: "Quantum",
-//                     url: "#",
-//                 },
-//             ],
-//         },
-//         {
-//             title: "Documentation",
-//             url: "#",
-//             icon: BookOpen,
-//             items: [
-//                 {
-//                     title: "Introduction",
-//                     url: "#",
-//                 },
-//                 {
-//                     title: "Get Started",
-//                     url: "#",
-//                 },
-//                 {
-//                     title: "Tutorials",
-//                     url: "#",
-//                 },
-//                 {
-//                     title: "Changelog",
-//                     url: "#",
-//                 },
-//             ],
-//         },
-//         {
-//             title: "Settings",
-//             url: "#",
-//             icon: Settings2,
-//             items: [
-//                 {
-//                     title: "General",
-//                     url: "#",
-//                 },
-//                 {
-//                     title: "Team",
-//                     url: "#",
-//                 },
-//                 {
-//                     title: "Billing",
-//                     url: "#",
-//                 },
-//                 {
-//                     title: "Limits",
-//                     url: "#",
-//                 },
-//             ],
-//         },
-//     ],
-//     projects: [
-//         {
-//             name: "Design Engineering",
-//             url: "#",
-//             icon: Frame,
-//         },
-//         {
-//             name: "Sales & Marketing",
-//             url: "#",
-//             icon: PieChart,
-//         },
-//         {
-//             name: "Travel",
-//             url: "#",
-//             icon: Map,
-//         },
-//     ],
-// }
-
 const teams = [
-    { name: "Acme Inc", logo: GalleryVerticalEnd, plan: "Enterprise" },
-    { name: "Acme Corp.", logo: AudioWaveform, plan: "Startup" },
-    { name: "Evil Corp.", logo: Command, plan: "Free" },
+    { name: "Apex", logo: <ApexLogoIcon className="w-10 h-10" />, plan: "Finance & Banking" },
+]
+
+const navigationItems: SidebarNavItem[] = [
+    {
+        group: 'MAIN',
+        items: [
+            {
+                title: 'Dashboard',
+                href: '/dashboard',
+                icon: <LayoutGrid className="h-5 w-5" />,
+            },
+            {
+                title: 'My Cards',
+                href: '/my-cards',
+                icon: <CreditCard className="h-5 w-5" />,
+            },
+            {
+                title: 'Transfer',
+                href: '/transfer',
+                icon: <ArrowLeftRight className="h-5 w-5" />,
+            },
+            {
+                title: 'Transactions',
+                href: '/transactions',
+                icon: <History className="h-5 w-5" />,
+            },
+            {
+                title: 'Payments',
+                href: '/payments',
+                icon: <Receipt className="h-5 w-5" />,
+            },
+            {
+                title: 'Exchange',
+                href: '/exchange',
+                icon: <RefreshCw className="h-5 w-5" />,
+            },
+        ]
+    },
+    {
+        group: 'OTHERS',
+        items: [
+            {
+                title: 'Settings',
+                href: '/settings',
+                icon: <Settings className="h-5 w-5" />,
+            },
+            {
+                title: 'Support',
+                href: '/support',
+                icon: <Headphones className="h-5 w-5" />,
+            },
+        ]
+    }
 ]
 
 export default function AppSideBar() {
     const pathname = usePathname()
     const { state, isMobile, setOpenMobile } = useSidebar()
 
-    const navigationItems: SidebarNavItem[] = [
-        {
-            group: 'Main',
-            items: [
-                {
-                    title: 'Dashboard',
-                    href: '/dashboard',
-                    icon: <Home className="h-4 w-4" />,
-                    description: 'Repository overview and search'
-                },
-                {
-                    title: 'My Cards',
-                    href: '/my-cards',
-                    icon: <Search className="h-4 w-4" />,
-                    description: 'Discover repositories by topics and languages'
-                },
-                {
-                    title: 'Transfer',
-                    href: '/transfer',
-                    icon: <Filter className="h-4 w-4" />,
-                    description: 'Advanced repository filtering options'
-                },
-                {
-                    title: 'Transactions',
-                    href: '/transactions',
-                    icon: <TrendingUp className="h-4 w-4" />,
-                    description: 'Trending repositories by time period'
-                },
-                {
-                    title: 'Exchange',
-                    href: '/exchange',
-                    icon: <TrendingUp className="h-4 w-4" />,
-                    description: 'Trending repositories by time period'
-                },
-                {
-                    title: 'Payments',
-                    href: '/payments',
-                    icon: <TrendingUp className="h-4 w-4" />,
-                    description: 'Trending repositories by time period'
-                },
-            ]
-        },
-        {
-            group: 'Other',
-            items: [
-                {
-                    title: 'Settings',
-                    href: '/settings',
-                    icon: <Settings className="h-4 w-4" />,
-                    description: 'Settings'
-                },
-                {
-                    title: 'Support',
-                    href: '/support',
-                    icon: <HelpCircle className="h-4 w-4" />,
-                    description: 'Support'
-                },
-            ]
-        }
-    ]
-
-    // Close mobile sidebar when navigation occurs
     const handleNavClick = () => {
         if (isMobile) {
             setOpenMobile(false)
@@ -261,174 +109,56 @@ export default function AppSideBar() {
     }
 
     return (
-        <Sidebar collapsible="icon">
-            <SidebarHeader>
-                {/* <div className="flex items-center gap-2 px-1 py-3">
-                    <Link href="/" className='size-7' onClick={handleNavClick}>
-                        <Github className="" />
-                    </Link>
-                    <AnimatePresence mode="wait">
-                        {state === "expanded" && (
-                            <motion.div
-                                key="header-text"
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -10 }}
-                                transition={{ duration: 0.2, ease: "easeInOut" }}
-                                className="w-full font-semibold flex items-center justify-between gap-2">
-                                <Link href="/" onClick={handleNavClick}>
-                                    <motion.span>
-                                        DevQuest
-                                    </motion.span>
-                                </Link>
-                                {!isMobile && <SidebarTrigger />}
-                            </motion.div>
-
-                        )}
-                    </AnimatePresence>
-                </div> */}
-
+        <Sidebar collapsible="icon" className="bg-sidebar border-r border-sidebar-border">
+            <SidebarHeader className="bg-sidebar relative">
                 <NavTeamSwitcher teams={teams} />
-                {!isMobile && <SidebarTrigger />}
-
+                <div className='absolute bottom-0 left-1/2 mx-auto max-w-[80%] -translate-x-1/2 h-px bg-sidebar-border w-full z-10' />
             </SidebarHeader>
 
-            <SidebarContent>
-                <SidebarGroup>
-                    {navigationItems.map((group) => (
-                        <React.Fragment key={group.group}>
-                            <SidebarGroupLabel>{group.group}</SidebarGroupLabel>
-                            <SidebarGroupContent>
-                                <SidebarMenu>
-                                    {group.items.map((item) => {
-                                        const isActive = pathname === item.href
-
-                                        return (
-                                            <SidebarMenuItem key={item.title}>
-                                                <SidebarMenuButton
-                                                    asChild
-                                                    isActive={isActive}
-                                                    tooltip={item.title}
-                                                >
-                                                    <Link href={item.href} onClick={handleNavClick}>
-                                                        {item.icon}
-                                                        <AnimatePresence mode="wait">
-                                                            {state === "expanded" && (
-                                                                <motion.span
-                                                                    key={`nav-${item.title}`}
-                                                                    initial={{ opacity: 0, x: -10 }}
-                                                                    animate={{ opacity: 1, x: 0 }}
-                                                                    exit={{ opacity: 0, x: -10 }}
-                                                                    transition={{ duration: 0.2, ease: "easeInOut" }}
-                                                                >
-                                                                    {item.title}
-                                                                </motion.span>
-                                                            )}
-                                                        </AnimatePresence>
-                                                    </Link>
-                                                </SidebarMenuButton>
-                                            </SidebarMenuItem>
-                                        )
-                                    })}
-                                </SidebarMenu>
-                            </SidebarGroupContent>
-                        </React.Fragment>
-                    ))}
-                </SidebarGroup>
+            <SidebarContent className="bg-sidebar">
+                {navigationItems.map((group) => (
+                    <SidebarGroup key={group.group} className='py-5 px-0'>
+                        <SidebarGroupLabel className="text-xs font-medium text-muted-foreground uppercase tracking-wider py-1 px-6">{group.group}</SidebarGroupLabel>
+                        <SidebarGroupContent className=''>
+                            <SidebarMenu>
+                                {group.items.map((item) => {
+                                    const isActive = pathname === item.href
+                                    return (
+                                        <SidebarMenuItem key={item.title} className='flex items-center relative'>
+                                            {isActive && state !== "collapsed" && (
+                                                <div className="absolute left-0 top-1/2 -translate-y-1/2  bg-primary w-1 h-5 rounded-r" />
+                                            )}
+                                            <SidebarMenuButton
+                                                asChild
+                                                isActive={isActive}
+                                                tooltip={item.title}
+                                                className={`${state !== "collapsed" ? "mx-5" : "mx-auto"} h-9 px-3 py-2 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground ${isActive ? 'bg-sidebar-accent text-sidebar-accent-foreground font-medium' : 'text-muted-foreground'}`}
+                                            >
+                                                <Link href={item.href} onClick={handleNavClick} className="flex items-center justify-between gap-2">
+                                                    <div className='flex items-center gap-3'>
+                                                        <span className={`block flex items-center justify-center ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
+                                                            {item.icon}
+                                                        </span>
+                                                        <span className="text-sm">{item.title}</span>
+                                                        {item.badge && (
+                                                            <span className="ml-auto bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full">{item.badge}</span>
+                                                        )}
+                                                    </div>
+                                                    <span className={`${isActive ? 'text-muted-foreground' : 'hidden'}`}><ChevronRight className='size-4' /></span>
+                                                </Link>
+                                            </SidebarMenuButton>
+                                        </SidebarMenuItem>
+                                    )
+                                })}
+                            </SidebarMenu>
+                        </SidebarGroupContent>
+                    </SidebarGroup>
+                ))}
             </SidebarContent>
 
-            <SidebarFooter className='px-0'>
-                {/* <SidebarGroup>
-                    <AnimatePresence mode="wait">
-                        {state === "expanded" && (
-                            <motion.div
-                                key="quick-access-label"
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -10 }}
-                                transition={{ duration: 0.2, ease: "easeInOut" }}
-                            >
-                                <SidebarGroupLabel>Quick Access</SidebarGroupLabel>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton
-                                    asChild
-                                    tooltip="Most Starred"
-                                >
-                                    <Link href="/repositories?q=stars:>1000" onClick={handleNavClick}>
-                                        <Star className="h-4 w-4" />
-                                        <AnimatePresence mode="wait">
-                                            {state === "expanded" && (
-                                                <motion.span
-                                                    key="most-starred"
-                                                    initial={{ opacity: 0, x: -10 }}
-                                                    animate={{ opacity: 1, x: 0 }}
-                                                    exit={{ opacity: 0, x: -10 }}
-                                                    transition={{ duration: 0.2, ease: "easeInOut" }}
-                                                >
-                                                    Most Starred
-                                                </motion.span>
-                                            )}
-                                        </AnimatePresence>
-                                    </Link>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-
-                            <SidebarMenuItem>
-                                <SidebarMenuButton
-                                    asChild
-                                    tooltip="Most Forked"
-                                >
-                                    <Link href="/repositories?q=forks:>100" onClick={handleNavClick}>
-                                        <GitFork className="h-4 w-4" />
-                                        <AnimatePresence mode="wait">
-                                            {state === "expanded" && (
-                                                <motion.span
-                                                    key="most-forked"
-                                                    initial={{ opacity: 0, x: -10 }}
-                                                    animate={{ opacity: 1, x: 0 }}
-                                                    exit={{ opacity: 0, x: -10 }}
-                                                    transition={{ duration: 0.2, ease: "easeInOut" }}
-                                                >
-                                                    Most Forked
-                                                </motion.span>
-                                            )}
-                                        </AnimatePresence>
-                                    </Link>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-
-                            <SidebarMenuItem>
-                                <SidebarMenuButton
-                                    asChild
-                                    tooltip="By Language"
-                                >
-                                    <Link href="/repositories?q=language:javascript" onClick={handleNavClick}>
-                                        <Code className="h-4 w-4" />
-                                        <AnimatePresence mode="wait">
-                                            {state === "expanded" && (
-                                                <motion.span
-                                                    key="by-language"
-                                                    initial={{ opacity: 0, x: -10 }}
-                                                    animate={{ opacity: 1, x: 0 }}
-                                                    exit={{ opacity: 0, x: -10 }}
-                                                    transition={{ duration: 0.2, ease: "easeInOut" }}
-                                                >
-                                                    By Language
-                                                </motion.span>
-                                            )}
-                                        </AnimatePresence>
-                                    </Link>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup> */}
-                <NavUser user={{ name: 'John Doe', email: 'john.doe@example.com', avatar: 'https://github.com/shadcn.png' }} />
+            <SidebarFooter className="bg-sidebar p-4 relative">
+            <div className='absolute top-0 left-1/2 mx-auto max-w-[80%] -translate-x-1/2 h-px bg-sidebar-border w-full z-10' />
+                <NavUser user={{ name: 'Arthur Taylor', email: 'arthur@alignui.com', avatar: 'avatar.png' }} />
             </SidebarFooter>
         </Sidebar>
     )

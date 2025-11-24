@@ -1,34 +1,46 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Info } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { CreditScoreIcon } from '../icons/icons';
+import { Separator } from '../ui/separator';
 
 export const CreditScoreWidget = () => {
-    // Generate bars for visual effect
-    const bars = Array.from({ length: 25 }, (_, i) => {
-        const isActive = i < 18; // 710 score roughly
+    // Generate bars 
+    const totalBars = 36;
+    const activeBars = 25;
+
+    const bars = Array.from({ length: totalBars }, (_, i) => {
+        const isActive = i < activeBars;
         return (
             <div
                 key={i}
-                className={`w-1.5 h-6 ${isActive ? 'bg-green-600' : 'bg-gray-200'}`}
+                className={`flex-1 h-[22px] w-1 ${isActive ? 'bg-[#1FC16B]' : 'bg-border'}`}
             />
         );
     });
 
     return (
-        <Card className="rounded-2xl border-gray-100 shadow-sm">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-base font-medium text-gray-900">Credit Score</CardTitle>
-                <Info size={16} className="text-gray-400" />
+        <Card className="shadow-xs">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0">
+                <div className="flex items-center gap-2 w-full">
+                    <div className="p-0.5">
+                        <CreditScoreIcon className="w-6 h-6" />
+                    </div>
+                    <CardTitle className="flex-1text-base font-medium text-foreground line-clamp-1">Credit Score</CardTitle>
+                </div>
+                <Button variant="outline" size="sm" className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground gap-1">
+                    Details
+                </Button>
             </CardHeader>
             <CardContent className="space-y-4">
-                <div className="flex justify-between items-end">
+                <Separator className='' />
+                <div className="flex justify-between items-start">
                     <div>
-                        <div className="flex items-baseline gap-2">
-                            <span className="text-lg text-gray-600">Your credit score is</span>
-                            <span className="text-lg font-bold text-gray-900">710</span>
-                        </div>
-                        <p className="text-xs text-gray-500">This score is considered to be Excellent.</p>
+                        <h3 className="text-xl font-normal text-muted-foreground mb-1">
+                            Your credit score is <span className="font-semibold text-foreground">710</span>
+                        </h3>
+                        <p className="text-xs text-muted-foreground">This score is considered to be Excellent.</p>
                     </div>
-                    <div className="w-10 h-10 bg-orange-50 rounded-full flex items-center justify-center text-xl">
+                    <div className="w-11 h-11 bg-[#FFF1EB] rounded-full flex items-center justify-center text-xl shrink-0">
                         😎
                     </div>
                 </div>
